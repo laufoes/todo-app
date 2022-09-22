@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import * as C from './App styles';
+import { IItem } from './interfaces/IItem';
+import { Item } from './components/Item';
 
 function App() {
+  const [ tarefa, setTarefa ] = useState<IItem[]>([
+    {
+      id: 1,
+      name: 'Comprar pão francês',
+      done: false
+    }, {
+      id: 2,
+      name: 'Pagar conta de luz',
+      done: false
+    }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Box>
+        <C.Header>
+          Lista de tarefas
+        </C.Header>
+        {tarefa.map((item) => (
+            <Item key={item.id} item={item}/>
+        ))}
+      </C.Box>
+    </C.Container>
   );
 }
 
