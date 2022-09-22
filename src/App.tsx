@@ -12,7 +12,7 @@ function App() {
     }, {
       id: 2,
       name: 'Pagar conta de luz',
-      done: false
+      done: true
     }
   ]);
 
