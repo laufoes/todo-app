@@ -3,7 +3,6 @@ import * as C from './App styles';
 import { IItem } from './interfaces/IItem';
 import { Item } from './components/Item';
 import { AdicionaTarefa } from './components/AdicionaTarefa';
-import { listenerCount } from 'process';
 
 function App() {
   const [ tarefa, setTarefa ] = useState<IItem[]>([
@@ -28,6 +27,16 @@ function App() {
     setTarefa(novaLista);
   }
 
+  const handleTarefaCompleta = (id: number, done: boolean) => {
+    let novaLista = [...tarefa];
+    for(let i in novaLista) {
+      if(novaLista[i].id === id) {
+        novaLista[i].done = done;
+      }
+    }
+    setTarefa(novaLista);
+  }
+
   return (
     <C.Container>
       <C.Box>
@@ -36,7 +45,11 @@ function App() {
         </C.Header>
         <AdicionaTarefa onEnter={handleNovaTarefa}/>
         {tarefa.map((item) => (
-            <Item key={item.id} item={item}/>
+            <Item 
+              key={item.id}
+              item={item}
+              onChange={handleTarefaCompleta}
+            />
         ))}
       </C.Box>
     </C.Container>

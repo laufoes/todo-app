@@ -1,20 +1,19 @@
 import * as C from './styles';
-import { useState } from 'react';
 import {IItem} from '../../interfaces/IItem';
 
 interface Props {
-    item: IItem
+    item: IItem,
+    onChange: (id: number, done: boolean) => void
 }
 
-export const Item = ({ item }: Props) => {
-    const [ feito, setFeito ] = useState(item.done);
+export const Item = ({ item, onChange }: Props) => {
 
     return(
-        <C.Container done={feito}>
+        <C.Container done={item.done}>
             <input 
                 type="checkbox"
-                checked={feito}
-                onChange={(e) => setFeito(e.target.checked)}
+                checked={item.done}
+                onChange={e => onChange(item.id, e.target.checked)}
             />
             <label>{item.name}</label>
         </C.Container>
