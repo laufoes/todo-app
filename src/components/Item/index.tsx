@@ -10,7 +10,7 @@ export const Item = ({ item }: Props) => {
     const [ feito, setFeito ] = useState(item.done);
 
     return(
-        <C.Container>
+        <C.Container done={feito}>
             <input 
                 type="checkbox"
                 checked={feito}
